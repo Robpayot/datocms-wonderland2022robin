@@ -8,8 +8,8 @@ export default {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
-    ]
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    ],
   },
   /*
    ** Customize the progress-bar color
@@ -36,7 +36,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
   ],
   /*
    ** Axios module configuration
@@ -50,19 +50,13 @@ export default {
     postcss: {
       preset: {
         features: {
-          customProperties: false
-        }
-      }
-    },
-    babel: {
-      plugins: [
-        ['@babel/proposal-decorators', { legacy: true }],
-        ['@babel/proposal-class-properties', { loose: true }]
-      ]
+          customProperties: false,
+        },
+      },
     },
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  }
+    extend(config, ctx) {},
+  },
 }

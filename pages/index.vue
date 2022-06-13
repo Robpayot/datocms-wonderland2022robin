@@ -128,6 +128,9 @@ export default class IndexPage extends Vue {
   }
 
   head() {
+    var p = 'ok'
+    zefze
+    console.log('test')
     if (!this.ready) {
       return
     }

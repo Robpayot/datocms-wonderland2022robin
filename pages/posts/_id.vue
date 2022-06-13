@@ -49,12 +49,12 @@ import QUERY from '~/assets/graphql/postPage'
     const data = await request({
       query: QUERY,
       variables: {
-        slug: params.id
-      }
+        slug: params.id,
+      },
     })
 
     return { ready: !!data, ...data }
-  }
+  },
 })
 export default class PostPage extends Vue {
   formatDate(date) {
@@ -64,13 +64,13 @@ export default class PostPage extends Vue {
   renderBlock = ({ record, h }) => {
     if (record.__typename === 'ImageBlockRecord') {
       return h('div', { class: 'mb-5' }, [
-        h('datocms-image', { props: { data: record.image.responsiveImage } })
+        h('datocms-image', { props: { data: record.image.responsiveImage } }),
       ])
     }
 
     return h('div', {}, [
       h('p', {}, "Don't know how to render a block!"),
-      h('pre', {}, JSON.stringify(record, null, 2))
+      h('pre', {}, JSON.stringify(record, null, 2)),
     ])
   }
 
