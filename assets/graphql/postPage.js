@@ -1,5 +1,4 @@
 import { gql, imageFields, seoMetaTagsFields } from '~/lib/datocms'
-import post from './fragments/post'
 
 const graphQuery = gql`
   query BlogPostQuery($slug: String!) {

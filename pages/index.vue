@@ -54,9 +54,7 @@
                       />
                     </div>
                     <div class="control">
-                      <a class="button is-info">
-                        Subscribe
-                      </a>
+                      <a class="button is-info"> Subscribe </a>
                     </div>
                   </div>
                 </div>
@@ -69,7 +67,7 @@
 
     <!-- Articles -->
 
-    <section class="hero ">
+    <section class="hero">
       <div class="hero-body">
         <div class="container">
           <div
@@ -118,11 +116,11 @@ import QUERY from '~/assets/graphql/index'
 @Component({
   async asyncData({ params }) {
     const data = await request({
-      query: QUERY
+      query: QUERY,
     })
 
     return { ready: !!data, ...data }
-  }
+  },
 })
 export default class IndexPage extends Vue {
   formatDate(date) {

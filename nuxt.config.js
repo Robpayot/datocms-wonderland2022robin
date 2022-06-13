@@ -8,8 +8,8 @@ export default {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    ],
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -53,6 +53,12 @@ export default {
           customProperties: false
         }
       }
+    },
+    babel: {
+      plugins: [
+        ['@babel/proposal-decorators', { legacy: true }],
+        ['@babel/proposal-class-properties', { loose: true }]
+      ]
     },
     /*
      ** You can extend webpack config here
