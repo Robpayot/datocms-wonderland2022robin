@@ -51,8 +51,6 @@ export default class Layouts extends Vue {
   navbarOpen = false
 
   toggleNavbar = () => {
-    zdd
-    const z = 'e'
     this.navbarOpen = !this.navbarOpen
   }
 }

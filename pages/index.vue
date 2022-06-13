@@ -19,7 +19,7 @@
                     <h2 class="subtitle is-4">
                       {{ formatDate(post.publicationDate) }}
                     </h2>
-                    <h1 class="title">
+                    <h1 v class="title">
                       <nuxt-link :to="`/posts/${post.slug}`">{{
                         post.title
                       }}</nuxt-link>
@@ -114,7 +114,7 @@ import Component from 'vue-class-component'
 import QUERY from '~/assets/graphql/index'
 
 @Component({
-  async asyncData({ params }) {
+  async asyncData() {
     const data = await request({
       query: QUERY,
     })
@@ -128,9 +128,6 @@ export default class IndexPage extends Vue {
   }
 
   head() {
-    var p = 'ok'
-    zefze
-    console.log('test')
     if (!this.ready) {
       return
     }
