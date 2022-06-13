@@ -36,103 +36,50 @@
 </template>
 
 <script>
-import { request, gql, imageFields, seoMetaTagsFields } from '~/lib/datocms'
+import { request } from '~/lib/datocms'
 import { toHead } from 'vue-datocms'
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import QUERY from '~/assets/graphql/postPage'
 
-export default {
+@Component({
   async asyncData({ params }) {
     const data = await request({
-      query: gql`
-        query BlogPostQuery($slug: String!) {
-          site: _site {
-            favicon: faviconMetaTags {
-              ...seoMetaTagsFields
-            }
-          }
-
-          post(filter: { slug: { eq: $slug } }) {
-            seo: _seoMetaTags {
-              ...seoMetaTagsFields
-            }
-            id
-            title
-            slug
-            publicationDate: _firstPublishedAt
-            content {
-              value
-              blocks {
-                __typename
-                ... on ImageBlockRecord {
-                  id
-                  image {
-                    responsiveImage(
-                      imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }
-                    ) {
-                      ...imageFields
-                    }
-                  }
-                }
-              }
-            }
-            coverImage {
-              responsiveImage(imgixParams: { fit: crop, ar: "16:9", w: 860 }) {
-                ...imageFields
-              }
-            }
-            author {
-              name
-              picture {
-                responsiveImage(imgixParams: { fit: crop, ar: "1:1", w: 40 }) {
-                  ...imageFields
-                }
-              }
-            }
-          }
-        }
-
-        ${imageFields}
-        ${seoMetaTagsFields}
-      `,
+      query: QUERY,
       variables: {
-        slug: params.id,
-      },
+        slug: params.id
+      }
     })
 
     return { ready: !!data, ...data }
-  },
-  methods: {
-    formatDate(date) {
-      return format(parseISO(date), 'PPP')
-    },
-    renderBlock: ({ record, h }) => {
-      if (record.__typename === 'ImageBlockRecord') {
-        return h(
-          'div',
-          { class: "mb-5" },
-          [
-            h("datocms-image", { props: { data: record.image.responsiveImage } }),
-          ]
-        );
-      }
+  }
+})
+export default class PostPage extends Vue {
+  formatDate(date) {
+    return format(parseISO(date), 'PPP')
+  }
 
-      return h(
-        'div',
-        {},
-        [
-          h('p', {}, "Don't know how to render a block!"),
-          h('pre', {}, JSON.stringify(record, null, 2)),
-        ]
-      );
-    },
-  },
+  renderBlock = ({ record, h }) => {
+    if (record.__typename === 'ImageBlockRecord') {
+      return h('div', { class: 'mb-5' }, [
+        h('datocms-image', { props: { data: record.image.responsiveImage } })
+      ])
+    }
+
+    return h('div', {}, [
+      h('p', {}, "Don't know how to render a block!"),
+      h('pre', {}, JSON.stringify(record, null, 2))
+    ])
+  }
+
   head() {
     if (!this.ready) {
       return
     }
 
     return toHead(this.post.seo, this.site.favicon)
-  },
+  }
 }
 </script>

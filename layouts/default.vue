@@ -14,7 +14,10 @@
         </div>
         <div :class="['navbar-menu', navbarOpen && 'is-active']">
           <div class="navbar-end">
-            <nuxt-link class="navbar-item is-active is-size-5 has-text-weight-semibold" to="/">
+            <nuxt-link
+              class="navbar-item is-active is-size-5 has-text-weight-semibold"
+              to="/"
+            >
               Home
             </nuxt-link>
           </div>
@@ -39,16 +42,16 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      navbarOpen: false
-    }
-  },
-  methods: {
-    toggleNavbar() {
-      this.navbarOpen = !this.navbarOpen
-    }
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component
+export default class Layouts extends Vue {
+  // Declared as component data
+  navbarOpen = false
+
+  toggleNavbar = () => {
+    this.navbarOpen = !this.navbarOpen
   }
 }
 </script>

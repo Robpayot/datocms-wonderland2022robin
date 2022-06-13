@@ -107,56 +107,28 @@
 </template>
 
 <script>
-import { request, gql, imageFields, seoMetaTagsFields } from '~/lib/datocms'
+import { request } from '~/lib/datocms'
 import { toHead } from 'vue-datocms'
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import QUERY from '~/assets/graphql/index'
 
-export default {
+@Component({
   async asyncData({ params }) {
     const data = await request({
-      query: gql`
-        {
-          site: _site {
-            favicon: faviconMetaTags {
-              ...seoMetaTagsFields
-            }
-          }
-
-          posts: allPosts(first: 10, orderBy: _firstPublishedAt_DESC) {
-            id
-            title
-            slug
-            publicationDate: _firstPublishedAt
-            excerpt
-            coverImage {
-              responsiveImage(imgixParams: { fit: crop, ar: "16:9", w: 860 }) {
-                ...imageFields
-              }
-            }
-            author {
-              name
-              picture {
-                responsiveImage(imgixParams: { fit: crop, ar: "1:1", w: 40 }) {
-                  ...imageFields
-                }
-              }
-            }
-          }
-        }
-
-        ${imageFields}
-        ${seoMetaTagsFields}
-      `
+      query: QUERY
     })
 
     return { ready: !!data, ...data }
-  },
-  methods: {
-    formatDate(date) {
-      return format(parseISO(date), 'PPP')
-    }
-  },
+  }
+})
+export default class IndexPage extends Vue {
+  formatDate(date) {
+    return format(parseISO(date), 'PPP')
+  }
+
   head() {
     if (!this.ready) {
       return

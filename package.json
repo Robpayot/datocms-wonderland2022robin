@@ -21,9 +21,12 @@
     "npm-force-resolutions": "^0.0.10",
     "nuxt": "^2.15.4",
     "vue": "^2.6.14",
+    "vue-class-component": "^7.2.6",
     "vue-datocms": "^0.2.3"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.17.12",
+    "@babel/plugin-proposal-decorators": "^7.18.2",
     "eslint-config-prettier": "^6.14.0",
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^1.19.1"
