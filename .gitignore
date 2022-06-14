@@ -91,3 +91,6 @@ sw.*
 *.swp
 
 .vercel
+
+# dump DatoCMS migration
+assets/dump/export
