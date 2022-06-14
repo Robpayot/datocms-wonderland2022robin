@@ -123,6 +123,11 @@ import QUERY from '~/assets/graphql/index'
   },
 })
 export default class IndexPage extends Vue {
+  mounted() {
+    console.log('test', this.$store)
+    this.$store.commit('increment', 1)
+  }
+
   formatDate(date) {
     return format(parseISO(date), 'PPP')
   }
