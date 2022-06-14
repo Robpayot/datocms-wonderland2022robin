@@ -20,6 +20,12 @@ export default {
    */
   css: [{ src: '~/assets/scss/main.scss', lang: 'scss' }],
   /*
+   ** Import Scss variables in all vue files
+   */
+  styleResources: {
+    scss: ['~/assets/scss/_includes.scss'],
+  },
+  /*
    ** Plugins to load before mounting the App
    */
   plugins: ['~/plugins/datocms'],
@@ -31,12 +37,11 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    '@nuxtjs/bulma',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources',
   ],
   /*
    ** Axios module configuration
